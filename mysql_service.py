@@ -16,6 +16,15 @@ def get_user(user_data):
 		return username 
 	return None
 
-# hashmap = {'username': 'don', 'password': 'passwerd'}
-# password = userValidate(cursor, hashmap)
-# print password
+def register_user(user_data):
+	username = user_data["username"]
+	password = user_data["password"]
+	email = user_data["email"]
+	result = cursor.execute("SELECT email FROM users WHERE email='" + email + "'")
+	if result:
+		return False
+
+	else:
+		cursor.execute("INSERT INTO users (name, password, email) VALUES('" + username 
+		+ "', '" + password + "', '" + email +"')")
+		return True
