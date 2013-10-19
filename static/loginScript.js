@@ -14,7 +14,7 @@ $(function() {
 		event.preventDefault();
 	});
 
-	$('#registerForm').submit(funtion(event) {
+	$('#registerForm').submit(function(event) {
 		$.ajax({
 			data: {
 				username: $('#registerUsername').val(),

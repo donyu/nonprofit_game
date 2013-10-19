@@ -1,5 +1,6 @@
 from flask import Flask, render_template, redirect, request, session, flash
-# import mysql_service
+import simplejson as JSON
+import mysql_service
 
 app = Flask(__name__)
 
@@ -16,6 +17,8 @@ def index():
 @app.route('/login', methods=['POST'])
 def login():
 	user = mysql_service.get_user(JSON.loads(request.data))
+	print "hello"
+	print user
 	if user:
 		session['username'] = user
 		return 'User Logged In', 200
