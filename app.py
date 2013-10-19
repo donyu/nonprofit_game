@@ -17,8 +17,6 @@ def index():
 @app.route('/login', methods=['POST'])
 def login():
 	user = mysql_service.get_user(JSON.loads(request.data))
-	print "hello"
-	print user
 	if user:
 		session['username'] = user
 		return 'User Logged In', 200
