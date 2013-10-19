@@ -24,15 +24,9 @@ def add_user(user_data):
 	if result:
 		return False
 	else:
-		#print user_data
-		query = "SELECT username FROM users WHERE name = '" + username + "'"
-		result = cursor.execute(query)
-		if result:
-			return False
-		else:
-			cursor.execute("INSERT INTO users (name, password, email) VALUES(%s, %s, %s)", (username, password, email))
-			connection.commit()
-			return True
+		cursor.execute("INSERT INTO users (name, password, email) VALUES(%s, %s, %s)", (username, password, email))
+		connection.commit()
+		return True
 
 def inc_points(user_data, pointAmount):
 	username = user_data['username']
