@@ -34,14 +34,24 @@ def inc_points(user_data, pointAmount):
 	password = user_data['password']
 	email = user_data['email']
 	query = "UPDATE users SET points = points + " + str(pointAmount) + " WHERE email = '" + email + "'"
-	#print query
 	result = cursor.execute(query)
 	if not result:
 		return False
 	else:
 		connection.commit()
-		print query
+		return True
+
+def inc_level(user_data):
+	email = user_data['email']
+	query = "UPDATE users SET level = level + 1 WHERE email = '" + email + "'"
+	print query
+	result = cursor.execute(query)
+	if not result:
+		return False
+	else:
+		connection.commit()
 		return True
 
 user_data = {'username': 'b', 'password': 'asdf', 'email': 'b@b.com'}
 inc_points(user_data, 7)
+inc_level(user_data)
