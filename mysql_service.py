@@ -29,12 +29,19 @@ def add_user(user_data):
 		connection.commit()
 		return True
 
-def increment_points(user_data, pointAmount):
+def inc_points(user_data, pointAmount):
 	username = user_data['username']
 	password = user_data['password']
 	email = user_data['email']
-	result = cursor.execute("UPDATA users SET points + " + pointAmount + " WHERE email = '" + email + "'")
+	query = "UPDATE users SET points = points + " + str(pointAmount) + " WHERE email = '" + email + "'"
+	#print query
+	result = cursor.execute(query)
 	if not result:
 		return False
 	else:
+		connection.commit()
+		print query
 		return True
+
+user_data = {'username': 'b', 'password': 'asdf', 'email': 'b@b.com'}
+inc_points(user_data, 7)
