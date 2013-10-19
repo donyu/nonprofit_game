@@ -34,7 +34,7 @@ def increment_points(user_data, pointAmount):
 	password = user_data['password']
 	email = user_data['email']
 	result = cursor.execute("UPDATA users SET points + " + pointAmount + " WHERE email = '" + email + "'")
-	if !result:
+	if not result:
 		return False
 	else:
 		return True
