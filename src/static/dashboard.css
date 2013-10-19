@@ -1,0 +1,81 @@
+body { 
+	background: url('../static/NYC-Skyline.jpg');
+	font-family: 'Open Sans', sans-serif;
+}
+.transition {
+	-webkit-transition: all 0.3s ease;      /* wtf is this shit */            
+	-moz-transition: all 0.3s ease;                 
+	-o-transition: all 0.3s ease;   
+	-ms-transition: all 0.3s ease;          
+	transition: all 0.3s ease;
+
+}
+.container {
+	width: 100%;
+	height: 100%;
+}
+.main {
+	display:block;
+	margin-top:100px;
+	width:800px;
+	margin-left:auto;
+	margin-right:auto;
+	background: rgba(236, 240, 241,0.9);
+	padding:30px;
+}
+.logo {
+	margin-left:auto;
+	margin-right:auto;
+	text-align:center;
+}
+h1 {
+	font-size:30px;
+	padding:10px;
+}
+.content {
+	margin-left:auto;
+	margin-right:auto;
+	text-align:center;
+	width:600px;	
+}
+/*.content {
+	background:#000000;
+	color:white;
+	padding:200px 350px;
+}
+*/
+.content {
+	background: rgba(189, 195, 199,1.0);
+	padding:30px;
+}
+.question {
+	font-size:15px;
+	margin-bottom:20px;
+}
+.choice {
+	display:block;
+	text-align:left;
+	padding:10px;
+	color: #34495e; 
+	cursor: pointer;
+}
+.choice a {
+	margin-left:10px;
+	font-weight:700;
+	color:#34495e;
+}
+.choice:hover {
+	background:rgba(255,255,255,0.1);
+}
+.correct {
+	background: rgba(0,255,0,0.3) !important; /* override hover */
+}
+.wrong {
+	background: rgba(255,0,0,0.3) !important;
+
+}
+
+.explanation {
+	opacity:0;
+	font-weight:700;
+}
