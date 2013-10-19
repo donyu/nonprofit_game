@@ -75,6 +75,17 @@ def get_question(user_data):
 	
 	return question_dict
 
+def check_answer(question, answer):
+	query = "SELECT answer FROM questions WHERE id = '" + str(question['id']) + "'"
+	result = cursor.execute(query)
+	realAnswer = cursor.fetchall()
+	return answer == realAnswer[0][0]
+	
+
+
 user_data = {'username': 'b', 'password': 'asdf', 'email': 'b@b.com', 'qcomplete': '0'}
 question_dict = get_question(user_data)
-print question_dict
+#print question_dict
+questionObj = {'answer': 'the world is cool', 'question_text': 'welcome to the world', 'type': 'tf', 'id': 0L, 'point_value': 100L}
+answer = 'the world is cool'
+right = check_answer(questionObj, answer)
