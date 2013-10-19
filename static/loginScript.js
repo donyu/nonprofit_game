@@ -10,6 +10,7 @@ $(function() {
 			type: 'POST',
 			success: function(response) {
 				window.location.replace('/');
+				// TODO if response is 201
 			}
 		});
 		event.preventDefault();
@@ -27,6 +28,7 @@ $(function() {
 			type: 'POST',
 			success: function(response) {
 				window.location.replace('/');
+				// TODO if response is 201
 			}
 		});
 		event.preventDefault();
