@@ -1,13 +1,16 @@
 #!/usr/bin/python 
-import MySQLdb
-import json
-import sys
+import MySQLdb #MySQL interfacing library
+
+#Init connection to DB on Heroku server
 connection = MySQLdb.connect(host="us-cdbr-east-04.cleardb.com",
 user="b2699bab0d03bc",
 passwd="92c968bb",
 db="heroku_62b297a4786cfb1")
 cursor = connection.cursor()
 
+# Function: get_user
+# Input: User object containing all information relating to what will be stored in the DB
+# Output: Returns the username indicating if one exists by returning something
 def get_user(user_data):
 	username = user_data['username']
 	password = user_data['password']
@@ -16,6 +19,9 @@ def get_user(user_data):
 		return username 
 	return None
 
+# Function: add_user
+# Input: User object as described above
+# Output: Adds user to database when registered given a unique email and username
 def add_user(user_data):
 	username = user_data['username']
 	password = user_data['password']
@@ -27,6 +33,10 @@ def add_user(user_data):
 		cursor.execute("INSERT INTO users (name, password, email) VALUES(%s, %s, %s)", (username, password, email))
 		connection.commit()
 		return True
+
+# Function: inc_points
+# Input: User object and point amount by which to increment the user's point total
+# Output: Modified database to reflect the increase in point total of users entry 
 
 def inc_points(user_data, pointAmount):
 	username = user_data['username']
@@ -40,6 +50,10 @@ def inc_points(user_data, pointAmount):
 		connection.commit()
 		return True
 
+# Function: inc_level
+# Input: User object
+# Output: Auto-increments the user's level by one given the username/email
+
 def inc_level(user_data):
 	email = user_data['email']
 	query = "UPDATE users SET level = level + 1 WHERE email = '" + email + "'"
@@ -50,6 +64,10 @@ def inc_level(user_data):
 	else:
 		connection.commit()
 		return True
+
+# Function: get_question
+# Input: User Object
+# Output: Returns a Question Dictionary containing all data corresponding to each type of question
 
 def get_question(user_data):
 	questionNumber = user_data['qcomplete']
@@ -74,12 +92,20 @@ def get_question(user_data):
 	
 	return question_dict
 
+# Function: check_answer
+# Input: Question object and an answer in String format
+# Output: Boolean representing if the answer was correct or not
+
 def check_answer(question, answer):
 	query = "SELECT answer FROM questions WHERE id = '" + str(question['id']) + "'"
 	result = cursor.execute(query)
 	realAnswer = cursor.fetchall()
 	return answer == realAnswer[0][0]
-	
+
+# Function: rankByPts
+# Input: No arguments. 
+# Output: Returns a list of the top scoring users to represent in the leaderboard
+
 def rankByPts():
 	query = "SELECT * FROM users ORDER BY points DESC LIMIT 0, 101"
 	result = cursor.execute(query)
@@ -89,10 +115,3 @@ def rankByPts():
 		userStats[users[1]] = users[4]
 
 	return userStats
-
-user_data = {'username': 'b', 'password': 'asdf', 'email': 'b@b.com', 'qcomplete': '0'}
-question_dict = get_question(user_data)
-questionObj = {'answer': 'the world is cool', 'question_text': 'welcome to the world', 'type': 'tf', 'id': 0L, 'point_value': 100L}
-answer = 'the world is cool'
-right = check_answer(questionObj, answer)
-rankByPts()
