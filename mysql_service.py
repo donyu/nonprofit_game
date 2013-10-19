@@ -24,10 +24,15 @@ def add_user(user_data):
 	if result:
 		return False
 	else:
-		print user_data
-		cursor.execute("INSERT INTO users (name, password, email) VALUES(%s, %s, %s)", (username, password, email))
-		connection.commit()
-		return True
+		#print user_data
+		query = "SELECT username FROM users WHERE name = '" + username + "'"
+		result = cursor.execute(query)
+		if result:
+			return False
+		else:
+			cursor.execute("INSERT INTO users (name, password, email) VALUES(%s, %s, %s)", (username, password, email))
+			connection.commit()
+			return True
 
 def inc_points(user_data, pointAmount):
 	username = user_data['username']
@@ -81,11 +86,19 @@ def check_answer(question, answer):
 	realAnswer = cursor.fetchall()
 	return answer == realAnswer[0][0]
 	
+def rankByPts():
+	query = "SELECT * FROM users ORDER BY points DESC LIMIT 0, 101"
+	result = cursor.execute(query)
+	rankings = cursor.fetchall()
+	userStats = dict()
+	for users in rankings:
+		userStats[users[1]] = users[4]
 
+	return userStats
 
 user_data = {'username': 'b', 'password': 'asdf', 'email': 'b@b.com', 'qcomplete': '0'}
 question_dict = get_question(user_data)
-#print question_dict
 questionObj = {'answer': 'the world is cool', 'question_text': 'welcome to the world', 'type': 'tf', 'id': 0L, 'point_value': 100L}
 answer = 'the world is cool'
 right = check_answer(questionObj, answer)
+rankByPts()
