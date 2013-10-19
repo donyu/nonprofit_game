@@ -52,6 +52,29 @@ def inc_level(user_data):
 		connection.commit()
 		return True
 
-user_data = {'username': 'b', 'password': 'asdf', 'email': 'b@b.com'}
-inc_points(user_data, 7)
-inc_level(user_data)
+def get_question(user_data):
+	questionNumber = user_data['qcomplete']
+	query = "SELECT * FROM questions WHERE id = '" + questionNumber + "'"
+	result = cursor.execute(query)
+	question = cursor.fetchall()
+	if not result:
+		return None
+
+	query = "SHOW COLUMNS FROM questions"
+	result = cursor.execute(query)
+	columnNames = cursor.fetchall()
+	columns = [] 
+	for arrays in columnNames:
+		columns.append(str(arrays[0]))
+
+	question_dict = dict()
+	i = 0
+	for values in columns:
+		question_dict[values] = question[0][i]
+		i += 1
+	
+	return question_dict
+
+user_data = {'username': 'b', 'password': 'asdf', 'email': 'b@b.com', 'qcomplete': '0'}
+question_dict = get_question(user_data)
+print question_dict
