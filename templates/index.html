@@ -10,6 +10,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.0/jquery-ui.min.js"></script>
 	<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+	<script src="../static/loginScript.js"></script>
 </head>
 <body>
 	<div class="container">
@@ -18,12 +19,12 @@
 				<h1>Fighting Homelessness</h1>
 			</div>
 			<div class="content">
-				<form action="/" action="get">
+				<form id="loginForm">
 					<div class="row">
-						<input type="text" placeholder="Username" class="form-control"/>
+						<input id="username" type="text" placeholder="Username" class="form-control"/>
 					</div>
 					<div class="row">
-						<input type="password" placeholder="Password" class="form-control" />
+						<input id="password" type="password" placeholder="Password" class="form-control" />
 					</div>
 					<div class="row submitButtons">
 						<input type="submit" value="Login" class="btn btn-lg btn-success login" />
@@ -39,11 +40,33 @@
 			        <h4 class="modal-title">Sign Up</h4>
 			      </div>
 			      <div class="modal-body">
-			        <p></p>
-			      </div>
-			      <div class="modal-footer">
-			        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-			        <button type="button" class="btn btn-primary">Save changes</button>
+			        <div class="row">
+                <div class="col-md-6">
+                  <div class="logowrapper">
+                    <img class="logoicon" src="http://placehold.it/200x200/bbb/&text=Your%20Logo" alt="App Logo"/>
+                  </div>
+                </div>
+                <div class="col-md-5">
+                  <form class="form-horizontal" id="registerForm">
+                    <p class="help-block">Username</p>
+                    <div class="input-prepend">
+                      <input id="registerUsername" class="prependedInput" size="16" type="text">
+                    </div>
+                    <p class="help-block">Email</p>
+                    <div class="input-prepend">
+                      <input id="registerEmail" class="prependedInput" size="16" type="email">
+                    </div>
+                    <p class="help-block">Password</p>
+                    <div class="input-prepend">
+                      <input id="registerPassword" class="prependedInput" size="16" type="password">
+                    </div>
+                  	<hr>
+                    <div class="help-block">
+                      <button type="submit" class="btn btn-large btn-info">Register</button>
+                    </div>
+                  </form>
+                </div>
+			        </div>
 			      </div>
 			    </div><!-- /.modal-content -->
 			  </div><!-- /.modal-dialog -->
